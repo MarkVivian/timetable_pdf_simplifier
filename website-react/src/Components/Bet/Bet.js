@@ -1,4 +1,5 @@
 import React from 'react'
+import "./Bet.css"
 
 function Bet() {
   return (

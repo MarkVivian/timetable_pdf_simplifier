@@ -6,6 +6,7 @@ import Navbar from "./Navbar/Navbar"
 function MainLayout() {
   return (
     <>
+    
         <nav>
             <Navbar />
         </nav>
