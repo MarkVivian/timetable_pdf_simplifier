@@ -2,6 +2,7 @@ import Bet from "./Bet/Bet"
 import Content from "./Content/Content"
 import Graph from "./Graph/Graph"
 import Navbar from "./Navbar/Navbar"
+import "./MainLayout.css"
 
 function MainLayout() {
   return (
@@ -11,7 +12,7 @@ function MainLayout() {
             <Navbar />
         </nav>
         
-        <div>
+        <div className="mainLayout">
             
             <div>
                 <Bet />

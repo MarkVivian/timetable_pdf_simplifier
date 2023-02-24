@@ -2,7 +2,7 @@ import "./Graph.css"
 
 function Graph() {
   return (
-    <div>Graph</div>
+    <div className="graph">Graph</div>
   )
 }
 

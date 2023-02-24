@@ -1,8 +1,20 @@
 import "./Navbar.css"
 
-function Navbar() {
+function Navbar() {  
   return (
-    <div>Navbar</div>
+    <nav className="navbar">
+      Navbar
+      
+    <div className="Logic">
+      <button>
+        Sign in
+      </button>
+      <button>
+        Login
+      </button>
+    </div>
+      
+    </nav>
   )
 }
 

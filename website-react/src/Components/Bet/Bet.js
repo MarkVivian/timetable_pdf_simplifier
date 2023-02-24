@@ -3,7 +3,7 @@ import "./Bet.css"
 
 function Bet() {
   return (
-    <div>
+    <div className='bet'>
         
         
     </div>

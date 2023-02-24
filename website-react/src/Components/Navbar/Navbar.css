@@ -1,0 +1,18 @@
+.navbar{
+    height: 3rem;
+    width: 100vw;
+    background: blue;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.Logic{
+    position: absolute;
+    right: 0;
+    top: 25%;
+}
+
+.Logic button{
+    margin-right: 1rem;
+}
