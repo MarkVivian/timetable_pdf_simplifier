@@ -4,14 +4,14 @@ export default {
   content: [
     "./src/**/**/*"
   ],
-  theme: {
+  theme: {   
     extend: {
       colors : {
-        background: {
-          
+        navbar : {
+           borderLight : "#F3EFEF"
         }
       }
-    },
+      }
   },
   plugins: [],
 }
