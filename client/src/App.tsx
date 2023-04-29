@@ -1,4 +1,4 @@
-import Index from "./Body/Index";
+import Body from "./Body/Body";
 import Footer from "./MainLayout/Footer";
 import Navbar from "./MainLayout/Navbar";
 
@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <>
         <Navbar />
-         <Index />
+         <Body />
         <Footer />
     </>
   );

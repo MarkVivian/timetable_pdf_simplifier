@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import catWhite from "../assets/catLight.png";
 import catDark from "../assets/catDark.png";
 import menuDark from "../assets/menuDark.png";
@@ -8,6 +8,7 @@ const Navbar:React.FC = () => {
     const classRef = useRef<HTMLDivElement>(null);
     const [Logoimage, setLogo] = useState(catDark)
     const [Menuimage, setMenu] = useState(menuDark)
+    const bodyElement = document.querySelector('body')?.classList;
     
     function ShowDropDown(){
         const values = classRef.current?.classList
@@ -18,16 +19,25 @@ const Navbar:React.FC = () => {
         }
     }
     
+    useEffect(()=>{
+       if(localStorage.getItem("mode")){
+        bodyElement?.add("dark");
+        setLogo(catWhite)
+        setMenu(menuLight)
+       } 
+    },[])
+    
     function ToggleDarkMode(){
-        const bodyElement = document.querySelector('body')?.classList;
         if(bodyElement?.contains("dark")){
             bodyElement.remove("dark");
             setLogo(catDark);
             setMenu(menuDark);
+            localStorage.removeItem("mode")
         }else{
             bodyElement?.add("dark");
             setLogo(catWhite);
             setMenu(menuLight);
+            localStorage.setItem("mode","dark");
         }
     }
     
