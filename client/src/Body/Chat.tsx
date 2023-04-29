@@ -21,7 +21,14 @@ const Chat:React.FC = () =>{
     }
     
     function Writting(event : React.ChangeEvent<HTMLInputElement>){
+        const{name, value} = event.target
         
+        setChat((item)=>{
+            return{
+                ...item,
+                [name] : value
+            }
+        })
     }
     
     function SendMessage(event : React.MouseEvent<HTMLButtonElement>){
@@ -47,23 +54,25 @@ const Chat:React.FC = () =>{
                     <Info />
                 </div>
                 
-                <div className=" block w-[100%] gap-1 text-center my-2 md:gap-1">
+                <div className="relative block w-[100%] gap-1 text-center my-2 md:gap-1">
                     <div>
                         userName
                     </div>
                     
-                    <div className=" flex w-[auto] gap-2 overflow-hidden">
-                        <form>
+                    <div className=" flex w-[100%] gap-2 overflow-hidden">
+                        
+                        <form className="md:w-[24rem] md:max-w-[25rem] bg-gray-300 w-[30rem] max-w-[33rem] ">
                             <input type="text"
                                     placeholder="enter message"
                                     value={chat.Message}
                                     onChange={Writting}
                                     name="Message" 
-                                    className="md:w-[17rem] max-w-[14rem]"/>
+                                    className="w-[100%] dark:text-black text-white"
+                                    />
                         </form>
-                        <button onClick={SendMessage} className="w-auto float-right bg-purple-700 rounded-sm">
-                                Send
-                        </button>
+                            <button onClick={SendMessage} className="md:max-w-[8rem] max-w-[12rem] relative float-right bg-purple-700 rounded-sm">
+                                    Send
+                            </button>
                     </div>
                     
                 </div>
