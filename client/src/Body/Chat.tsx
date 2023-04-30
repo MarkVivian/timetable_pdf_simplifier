@@ -1,10 +1,21 @@
 import React, { useRef, useState } from "react";
 
+interface chatInterface {
+    Message : string,
+    time : string,
+    messenger : string
+}
+
 const Chat:React.FC = () =>{
     const hideshowRef = useRef<HTMLDivElement>(null);
-    const[chat, setChat] = useState({
-        Message : ""
+    
+    const[chat, setChat] = useState<chatInterface>({
+        Message : "",
+        time : "",
+        messenger : ""
     })
+    
+    
     
     const Info =() =>{
         return(
@@ -33,6 +44,13 @@ const Chat:React.FC = () =>{
     
     function SendMessage(event : React.MouseEvent<HTMLButtonElement>){
         event.preventDefault()
+        setChat((item)=>{
+            return{
+                ...item,
+                Message : "",
+                time : ""
+            }
+        })
         
     }
     
@@ -61,7 +79,7 @@ const Chat:React.FC = () =>{
                     
                     <div className=" flex w-[100%] gap-2 overflow-hidden">
                         
-                        <form className="md:w-[24rem] md:max-w-[25rem] bg-gray-300 w-[30rem] max-w-[33rem] ">
+                        <form className="md:w-[24rem] md:max-w-[25rem] bg-gray-300 w-[30rem] max-w-[33rem] lg:w-[44rem]">
                             <input type="text"
                                     placeholder="enter message"
                                     value={chat.Message}
