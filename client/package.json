@@ -14,8 +14,10 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
+    "@types/chart.js": "^2.9.37",
     "@types/node": "^18.16.1",
     "@types/react": "^18.0.28",
+    "@types/react-chartjs-2": "^2.5.7",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "autoprefixer": "^10.4.14",

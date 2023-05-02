@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2"; // since we want a line chart.
 import {
     Chart as ChartJS, 
@@ -10,14 +10,18 @@ import {
     Tooltip
 } from "chart.js";
 
-const Data = [
-    { id: 1, year: 2021, usergain: 1000, userloss: 500 },
-    { id: 2, year: 2022, usergain: 1500, userloss: 800 },
-    { id: 3, year: 2023, usergain: 2000, userloss: 1000 },
-    { id: 4, year: 2024, usergain: 2500, userloss: 1200 },
-    { id: 5, year: 2025, usergain: 3000, userloss: 1500 },
-    { id: 6, year: 2026, usergain: 3500, userloss: 1800 }
-  ];
+interface useInterface {
+    labels : string[],
+    datasets : [
+        {
+            label : string,
+            data : number[],
+            backgroundColors : string,
+            borderColor : string,
+            pointBorderColor : string,
+        }
+    ]
+}
   
  
 ChartJS.register(
@@ -26,42 +30,85 @@ ChartJS.register(
     LinearScale,
     PointElement,
     Legend,
-    Tooltip
+    Tooltip,
 )
 
 const Graph:React.FC = () =>{
+    const [counter, setCounter] = useState<number>(1)
     
-    const actualUse = {
-        labels : Data.map((item) => item.year),
+    useEffect(()=>{
+       const intervalMade = setInterval(()=>{
+            setCounter((value)=>{
+                const count = value + 1
+                if(value >= 10){
+                    clearInterval(intervalMade)
+                }
+                return count   
+            })
+       }, 1000)
+        
+        return () => clearInterval(intervalMade)
+        }, []) 
+        
+    const [actualUse, setActualUse] = useState<useInterface>({
+        labels : [],
         datasets : [
             {
-                label : "User Gain",
-                data : Data.map((item)=> item.usergain),
+                label : "Pakakumi",
+                data : [],
                 backgroundColors : "yellow",
                 borderColor : "white",
                 pointBorderColor : "red",
-                tension : 2000  
             }
         ]
-    }
+    })
     
-    const options = {
-        Plugins : {
-            legend : true
+    useEffect(()=>{
+        setActualUse((value):useInterface=>{
+            return{
+                ...value,
+                labels : [...value.labels.toString(), counter.toString()],
+                datasets : [
+                    {
+                        ...value.datasets[0],
+                        data : [...value.datasets[0].data, counter],
+                    }
+                ]
+            }
+        })
+    }, [counter])   
+ 
+    console.log(counter)
+    
+    const Options = {
+        plugin : {
+            legend : true,
+            Animation: true
         },
         scales : {
             y : {
-                min : Data.reduce((acc, curr) => { return (acc.usergain > curr.usergain) ? acc : curr}).usergain,// the max value of y
-                max :  Data.reduce((acc, curr) => { return (acc.usergain < curr.usergain) ? acc : curr}).usergain // the min value of y
-            }
-        }
+                min : 0,
+                max : counter + 1    
+             },
+             x : {
+                min : 0,
+                max : counter + 1
+             }  
+        },
+        Animation: {
+            duration: 1000,
+            easing: "linear",
+            from: 1,
+            to: 0,
+            loop: true,
+          },
     }
     
     return(
         <div className="graph">
               <Line
               data={actualUse}
-              options={options}
+              options={Options}
               />
         </div>
     )
