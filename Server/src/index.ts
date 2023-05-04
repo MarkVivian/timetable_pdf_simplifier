@@ -6,7 +6,11 @@ import HandleHistory from "./History/HandleHistory";
 import HandleChat from "./Chat/HandleChat";
 
 
-App.use(cors())
+App.use(cors({
+    origin : 'http://localhost:3000',
+    methods : ["POST", "GET"],
+    allowedHeaders : ["authorization", "content-type"]
+}))
 App.use(express.json())
 
 
