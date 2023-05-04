@@ -1,8 +1,17 @@
+interface betInfo{
+    total : number[],
+    profit : number,
+    chartValues : number[]
+    
+}
+
 export default class BetsClass{
    private total:number[] = [];
    private value!:number;
+   private ChartValue!:number[];
+   private profit!:number;
    
-   SetValue(value:number){
+   constructor(value:number){
     this.value=value;
    }
     
@@ -11,17 +20,24 @@ export default class BetsClass{
             const value = Math.round(i*10)/10
            this.total.push(userBet * value);
         }
+        this.profit= Math.max(...this.total)
     }
     
-    GetTotal():number[]{
-        return this.total;   
-    }
     
-    ChartList():number[]{
-        const chartValue:number[] = []
-        for(var i =0; i <= this.value; i+=0.1){
-            chartValue.push(Math.round(i*10)/10)
+    GetBetInfo():betInfo{
+        return{
+            total: this.total,
+            profit: this.profit,
+            chartValues: this.ChartValue
         }
-        return chartValue
     }
+    
+    ChartList(){
+        const chart:number[] = []
+        for(var i =0; i <= this.value; i+=0.1){
+            chart.push(Math.round(i*10)/10)
+        }
+        this.ChartValue = chart;
+    }
+
 }
