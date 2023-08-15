@@ -1,0 +1,91 @@
+nav div div a {
+  margin: auto 1rem;
+}
+nav div div .hideDropDown {
+  display: none;
+}
+nav div div .showDropDown {
+  border: 4px solid "#F3EFEF";
+  display: grid;
+  width: 8rem;
+  height: auto;
+  position: absolute;
+  top: 4.2rem;
+  right: 0rem;
+  overflow: hidden;
+}
+nav div div .showDropDown a {
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  color: black;
+  background-color: white;
+  margin-right: 0.5rem;
+  margin: 0.1rem;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition-duration: 1s;
+}
+body.dark {
+  background-color: black;
+  color: white;
+  transition-duration: 1s;
+}
+
+.betcommonStyle, .bodyTag .info .history, .bodyTag .info .chat, .bodyTag .info .Bets, .bodyTag .bet .graph, .bodyTag .bet .betSlip {
+  display: block;
+  margin: 2px;
+}
+
+.infoCommonStyle, .bodyTag .info .history button, .bodyTag .info .chat button {
+  width: 100%;
+  text-align: center;
+}
+
+.bodyTag .bet .betSlip {
+  border: 4px solid orange;
+}
+.bodyTag .bet .betSlip div input .submitted {
+  pointer-events: none;
+}
+.bodyTag .bet .graph {
+  border: 4px solid blue;
+}
+.bodyTag .info .Bets {
+  border: 4px solid indianred;
+}
+.bodyTag .info .Bets .hide {
+  display: none;
+}
+.bodyTag .info .chat {
+  border: 4px solid violet;
+}
+.bodyTag .info .chat .hide {
+  display: none;
+}
+.bodyTag .info .history {
+  border: 4px solid green;
+}
+.bodyTag .info .history .hide {
+  display: none;
+}
+.bodyTag .info .history .historyView span {
+  overflow-x: hidden;
+}
+.bodyTag .bet, .bodyTag .info {
+  width: 100%;
+  margin: 0.2rem;
+}
+@media (min-width: 768px) {
+  .bodyTag .bet, .bodyTag .info {
+    width: 50%;
+  }
+}
+
+@tailwind components;
+@tailwind base;
+@tailwind utilities;/*# sourceMappingURL=App.css.map */
