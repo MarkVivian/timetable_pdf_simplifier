@@ -1,12 +1,7 @@
-import pdf_simplifier.simplifier_tabula_panda as pdf
+import pdf_formatter.pdfFormatter as pdfFile
 
 
 def course_register():
-    # number_of_courses: int = int(input("how many courses are you doing:    "))
-    # courses: list[str] = []
-    # for i in range(number_of_courses):
-    #     courses.append(input(f"course name {i}: ").upper())
-    # print(courses)
     courses: list[str] = [
         "CHAL 451",
         "CHEM 419",
@@ -16,9 +11,8 @@ def course_register():
         "BMET 442",
         "PHYS 483"
     ]
-    file_path = "./pdf_simplifier/timeTable.pdf"
-    method1 = pdf.SimplifyTabulaPanda(file_path, courses)
-    method1.checking_column()
+    file_path = "./timeTable.pdf"
+    pdfFile.PdfFormatter(file_path, courses)
 
 
 if __name__ == '__main__':
