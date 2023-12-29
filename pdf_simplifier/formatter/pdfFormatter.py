@@ -5,7 +5,7 @@ import formatter.csvFormatter as csvFm
 
 class PdfFormatter:
     def __init__(self, file_path, courses):
-        self.pdf_file = file_path
+        self.pdf_files = file_path
         self.courses = courses
         self.file_names = [
             "table_format_1.csv",
@@ -18,11 +18,12 @@ class PdfFormatter:
         csvFm.CsvFormatter(self.file_names[2], self.file_names[3], self.file_names[4])
 
     def convert_to_csv(self):
-        # Read a PDF File
-        df = tabula.read_pdf(self.pdf_file, pages='all')[0]
-        # convert PDF into CSV
-        tabula.convert_into(self.pdf_file, self.file_names[0], output_format="csv", pages='all')
-        self.clean_csv_file()
+        for file in self.pdf_files:
+            # Read a PDF File
+            df = tabula.read_pdf(file, pages='all')[0]
+            # convert PDF into CSV
+            tabula.convert_into(file, self.file_names[0], output_format="csv", pages='all')
+            self.clean_csv_file()
 
     def get_row_sizes(self):
         row_sizes = []

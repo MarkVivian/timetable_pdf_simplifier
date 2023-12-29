@@ -1,20 +1,27 @@
-import formatter.pdfFormatter as pdfFile
+import pdf_formatter.extracting_table as et
 
 
-def course_register():
-    courses: list[str] = [
-        "COSC 312",
-        "COSC 325",
-        "COSC 326",
-        "COSC 332",
-        "COSC 340",
-        "COSC 361",
-        "COSC 380"
-    ]
-    file_path = "test/timeTable.pdf"
-    pdfFile.PdfFormatter(file_path, courses)
+class Manager:
+    def __init__(self):
+        self.courses = [
+            "COSC 312",
+            "COSC 325",
+            "COSC 326",
+            "COSC 332",
+            "COSC 340",
+            "COSC 361",
+            "COSC 380"
+        ]
+        self.teaching_pdf = "original_pdf/teaching_timeTable.pdf"
+        self.exam_pdf = "original_pdf/exam_time_table.pdf"
+        self.formatted_path = "formatted_pdf/"
+
+    def course_register(self):
+        try:
+            et.Extraction(self.teaching_pdf, self.exam_pdf, self.courses, self.formatted_path)
+        except Exception as e:
+            print(f"an error occurred in the main file \n in the course registration function. \n the error was {e}")
 
 
 if __name__ == '__main__':
-    course_register()
-
+    Manager().course_register()
