@@ -1,7 +1,5 @@
+import pandas
 import tabula
-import pandas as pd
-# this will allow me to see the exceptions that will be returned by the tabula package
-import traceback
 
 
 # since the table are in a pdf, we need to extract them.
@@ -11,45 +9,59 @@ class Extraction:
         self.pdf_content = {
             "teaching_content": [
                 teaching_pdf,
-                f"{formatted_path}extracted_teaching.csv",
+                f"{formatted_path}format1_teaching.csv",
+                f"{formatted_path}format2_teaching.csv",
+                f"{formatted_path}completed_teaching.csv",
+                f"{formatted_path}removed_redundancy_teaching.csv",
+                f"{formatted_path}added_time_teaching.csv"
             ],
             "exam_content": [
                 exam_pdf,
-                f"{formatted_path}extracted_exam.csv"
+                f"{formatted_path}format1_exam.csv",
+                f"{formatted_path}format2_exam.csv",
+                f"{formatted_path}completed_exam.csv",
+                f"{formatted_path}removed_redundancy_exam.csv",
+                f"{formatted_path}added_time_exam.csv"
             ]
         }
-        self.extract_table()
+        self.original_pdf = [self.pdf_content["teaching_content"][0], self.pdf_content["exam_content"][0]]
+        self.format1_csv = [self.pdf_content["teaching_content"][1], self.pdf_content["exam_content"][1]]
+        self.format2_csv = [self.pdf_content["teaching_content"][2], self.pdf_content["exam_content"][2]]
+        self.complete_csv = [self.pdf_content["teaching_content"][3], self.pdf_content["exam_content"][3]]
+        self.remove_redundancy_csv = [self.pdf_content["teaching_content"][4], self.pdf_content["exam_content"][4]]
+        self.add_time_csv = [self.pdf_content["teaching_content"][5], self.pdf_content["exam_content"][5]]
+        self.convert_pdf_to_csv()
+        self.clean_csv()
 
-    def extract_table(self):
-        pdfs = [self.pdf_content["teaching_content"][0], self.pdf_content["exam_content"][0]]
-        csvs = [self.pdf_content["teaching_content"][1], self.pdf_content["exam_content"][1]]
-        for pdf, csv in zip(pdfs, csvs):
+    def convert_pdf_to_csv(self):
+        for (original_file, format1_csv) in zip(self.original_pdf, self.format1_csv):
             try:
-                # Extract tables from the PDF
-                tables = tabula.read_pdf(pdf, pages='all', multiple_tables=True)
+                # Read a PDF File
+                var = tabula.read_pdf(original_file, pages='all')
 
-                # Filter rows based on target courses
-                filtered_tables = []
-                for table in tables:
-                    # Check if the DataFrame is not empty
-                    if not table.empty:
-                        # Print the structure of the DataFrame for debugging
-                        print(table.head())
-
-                        # Assuming the course information is in a specific column, adjust the column index accordingly
-                        course_column_index = 0
-
-                        # Filter rows based on the target courses
-                        filtered_table = table[table.iloc[:, course_column_index].isin(self.courses)]
-                        filtered_tables.append(filtered_table)
-
-                # Concatenate the filtered tables into a single DataFrame
-                result_df = pd.concat(filtered_tables)
-
-                # Write the DataFrame to a new PDF
-                result_df.to_csv(csv, index=False)
-                print(f"Successfully extracted data from {pdf} \n and saved to {csv}")
+                # convert PDF into CSV
+                tabula.convert_into(original_file, format1_csv, output_format='csv', pages='all')
             except Exception as e:
-                print(f"the error occurred while extracting table "
-                      f"\n from pdf {pdf} "
-                      f"\n and the error {traceback.format_exc()}")
+                print(f"an error occurred while converting pdf to csv \n line 38 \n file {original_file} \n error {e}")
+
+    def clean_csv(self):
+        for format1_csv, format2_csv in zip(self.format1_csv, self.format2_csv):
+            try:
+                # Read the CSV into a Pandas DataFrame
+                df = pandas.read_csv(format1_csv, skiprows=[0])
+
+                # Calculate row sizes (e.g., number of characters in each row)
+                row_sizes = df.apply(lambda row: len(','.join(map(str, row))), axis=1)
+
+                # Identify and remove rows where the size of data in column A is larger than a threshold
+                # and where column A is not empty.
+                threshold_size = 90  # You can adjust this threshold based on your data
+                jungle_mask = (row_sizes >= threshold_size)
+
+                # Create a clean DataFrame excluding the rows with jungled data
+                clean_df = df[~jungle_mask]
+
+                # Save the cleaned DataFrame as a new CSV file
+                clean_df.to_csv(format2_csv, index=False)
+            except Exception as e:
+                print(f"an error occurred while cleaning csv \n line 46 \n file {format1_csv} \n error {e}")

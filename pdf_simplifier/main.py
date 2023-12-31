@@ -12,7 +12,7 @@ class Manager:
             "COSC 361",
             "COSC 380"
         ]
-        self.teaching_pdf = "original_pdf/teaching_timeTable.pdf"
+        self.teaching_pdf = "original_pdf/teaching_time_table.pdf"
         self.exam_pdf = "original_pdf/exam_time_table.pdf"
         self.formatted_path = "formatted_pdf/"
 
