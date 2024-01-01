@@ -1,3 +1,5 @@
+import os
+
 from extractor import method_1, method_2
 
 
@@ -22,6 +24,12 @@ class Manager:
             method_2.Extraction(self.teaching_pdf, self.exam_pdf, self.courses, self.formatted_path)
         except Exception as e:
             print(f"an error occurred in the main file \n in the course registration function. \n the error was {e}")
+
+    def check_file_type(self):
+        pass
+
+    def read_content(self):
+        pass
 
 
 if __name__ == '__main__':
