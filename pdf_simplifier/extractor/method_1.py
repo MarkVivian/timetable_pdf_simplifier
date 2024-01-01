@@ -41,6 +41,7 @@ class Extraction:
 
                 # convert PDF into CSV
                 tabula.convert_into(original_file, format1_csv, output_format='csv', pages='all')
+                print(" \n successfully extracted the table to csv \n")
             except Exception as e:
                 print(f"an error occurred while converting pdf to csv \n line 38 \n file {original_file} \n error {e}")
 
@@ -63,5 +64,6 @@ class Extraction:
 
                 # Save the cleaned DataFrame as a new CSV file
                 clean_df.to_csv(format2_csv, index=False)
+                print("\n successfully cleaned the csv file \n")
             except Exception as e:
                 print(f"an error occurred while cleaning csv \n line 46 \n file {format1_csv} \n error {e}")

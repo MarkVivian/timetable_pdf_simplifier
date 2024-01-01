@@ -1,4 +1,4 @@
-import pdf_formatter.extracting_table as et
+from extractor import method_1, method_2
 
 
 class Manager:
@@ -18,7 +18,8 @@ class Manager:
 
     def course_register(self):
         try:
-            et.Extraction(self.teaching_pdf, self.exam_pdf, self.courses, self.formatted_path)
+            # method_1.Extraction(self.teaching_pdf, self.exam_pdf, self.courses, self.formatted_path)
+            method_2.Extraction(self.teaching_pdf, self.exam_pdf, self.courses, self.formatted_path)
         except Exception as e:
             print(f"an error occurred in the main file \n in the course registration function. \n the error was {e}")
 
