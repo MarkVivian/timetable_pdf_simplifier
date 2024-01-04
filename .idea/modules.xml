@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pdf_simplifier.iml" filepath="$PROJECT_DIR$/.idea/pdf_simplifier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/timetable_pdf_simplifier.iml" filepath="$PROJECT_DIR$/.idea/timetable_pdf_simplifier.iml" />
     </modules>
   </component>
 </project>

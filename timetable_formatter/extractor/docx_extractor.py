@@ -2,16 +2,16 @@ import camelot
 
 
 class Extraction:
-    def __init__(self, teaching_pdf, exam_pdf, courses, formatted_path):
+    def __init__(self, pdfs, courses, formatted_path):
         self.courses = courses
         self.pdf_content = {
             "exam": [
-                exam_pdf,
+                pdfs[0],
                 f"{formatted_path}camelot_exam_table1.csv",
                 f"{formatted_path}camelot_exam_table2.csv"
             ],
             "teaching": [
-                teaching_pdf,
+                pdfs[1],
                 f"{formatted_path}camelot_teaching_table1.csv",
                 f"{formatted_path}camelot_teaching_table2.csv"
             ]
