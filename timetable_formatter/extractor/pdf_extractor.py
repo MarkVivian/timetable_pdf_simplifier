@@ -1,11 +1,11 @@
-import os.path
 import pandas as pd
 import tabula
-from reuse import name_extractor_and_former, content_of_dir
+from reuse import name_extractor_and_former, content_of_dir, formatted_file_path
 from filtrator import filter_csv
 
 
 def pdf_to_csv(pdfs, courses):
+    error_checker = False
     for index, pdf in enumerate(pdfs):
         try:
 
@@ -25,10 +25,12 @@ def pdf_to_csv(pdfs, courses):
 
             print(" \n successfully extracted the table to csv \n")
         except Exception as e:
+            error_checker = True
             print(f"an error occurred while converting pdf to csv \n line 38 \n file {pdf} \n error {e}")
 
     # filter the data when done
-    filter_csv(courses=courses, files=content_of_dir("./formatted_pdf/"))
+    if not error_checker:
+        filter_csv(courses=courses, files=content_of_dir(formatted_file_path))
 
 
 def clean_csv(csv_file, csv_content, index):
